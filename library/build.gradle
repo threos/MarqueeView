@@ -1,6 +1,10 @@
 plugins {
     id 'com.android.library'
+    id 'com.jfrog.bintray'
+    id 'maven-publish'
 }
+
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 30
@@ -27,12 +31,45 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 }
-
 dependencies {
-
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
+
+def libraryGroupId = 'com.dashelvest.views'
+def libraryArtifactId = 'MarqueeView'
+def libraryVersion = '1.0.0'
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = libraryGroupId
+                artifactId = libraryArtifactId
+                version = libraryVersion
+            }
+        }
+    }
+}
+
+bintray {
+    user = project.property('bintray.user')
+    key = project.property('bintray.token')
+    publications = ['release']
+    publish = true
+    override = true
+    pkg {
+        repo = 'views'
+        name = libraryArtifactId
+        userOrg = 'dashelvest'
+        desc = 'RecyclerView based custom MarqueeView for Android'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/threos/MarqueeView.git'
+        publicDownloadNumbers = true
+        version {
+            name = libraryVersion
+            released = new Date()
+        }
+    }
 }

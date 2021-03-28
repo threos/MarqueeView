@@ -38,7 +38,7 @@ dependencies {
 
 def libraryGroupId = 'com.dashelvest.views'
 def libraryArtifactId = 'MarqueeView'
-def libraryVersion = '1.0.0'
+def libraryVersion = '1.0.1'
 afterEvaluate {
     publishing {
         publications {

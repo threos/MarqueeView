@@ -21,7 +21,7 @@ Add MarqueeView to your app `build.gradle`:
 ```
 dependencies {
     ...
-    implementation 'com.dashelvest.views:MarqueeView:1.0.0'
+    implementation 'com.dashelvest.views:MarqueeView:1.0.1'
     ...
 }
 ```

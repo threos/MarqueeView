@@ -25,7 +25,7 @@ public class MarqueeParentAdapter<VH extends RecyclerView.ViewHolder> extends Re
 
     @Override
     public final int getItemCount() {
-        return Integer.MAX_VALUE;
+        return adapter.getItemCount() == 0 ? 0 : Integer.MAX_VALUE;
     }
 
     /**
